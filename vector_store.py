@@ -2,120 +2,125 @@ import os
 import glob
 import json
 import time
+import hashlib
+import logging
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 API_KEY = os.environ.get("GEMINI_API_KEY")
-if not API_KEY:
-    print("WARNING: GEMINI_API_KEY not found in environment.")
-else:
+
+if API_KEY:
     genai.configure(api_key=API_KEY)
 
 DATA_DIR = "data"
-SYNC_STATE_FILE = "sync_state.json"
+STATE_FILE = "sync_state.json"
 
-SYSTEM_PROMPT = """You are OptiBot, the customer-support bot for OptiSigns.com.
-• Tone: helpful, factual, concise.
-• Only answer using the uploaded docs.
-• Max 5 bullet points; else link to the doc.
-• Cite up to 3 "Article URL:" lines per reply."""
+SYSTEM_PROMPT = """You are OptiBot, a helpful AI customer support assistant for OptiSigns.
+Your goal is to answer questions based strictly on the provided knowledge base.
+If the answer is not in the knowledge base, politely say that you don't know and offer to connect them to human support.
+Be concise and professional.
+"""
 
-def load_sync_state():
-    if os.path.exists(SYNC_STATE_FILE):
-        with open(SYNC_STATE_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {}
-
-def save_sync_state(state):
-    with open(SYNC_STATE_FILE, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=4)
+def get_all_remote_files():
+    """Lấy danh sách các file đã upload trên Gemini File API."""
+    files = []
+    try:
+        for f in genai.list_files():
+            files.append(f)
+    except Exception as e:
+        logging.error(f"Error listing files: {e}")
+    return files
 
 def upload_files_to_gemini():
-    """Uploads markdown files to Gemini via File API."""
-    md_files = glob.glob(os.path.join(DATA_DIR, "*.md"))
-    state = load_sync_state()
-    uploaded_files = []
+    """Upload new/updated markdown files to Gemini."""
+    if not API_KEY:
+        logging.warning("GEMINI_API_KEY not found in environment.")
+        return
+        
+    md_files = glob.glob(f"{DATA_DIR}/*.md")
+    logging.info(f"Found {len(md_files)} files. Syncing to Gemini...")
     
+    # Load state
+    state = {}
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE, "r") as f:
+            state = json.load(f)
+            
     added = 0
     updated = 0
     skipped = 0
     
-    print(f"Found {len(md_files)} files. Syncing to Gemini...")
-    
     for filepath in md_files:
         filename = os.path.basename(filepath)
-        mod_time = os.path.getmtime(filepath)
         
-        # Simple delta check
-        if filename in state and state[filename].get("mtime") == mod_time:
+        # Read file and generate hash
+        with open(filepath, "rb") as f:
+            file_hash = hashlib.md5(f.read()).hexdigest()
+        
+        # Delta check
+        if filename in state and state[filename].get("hash") == file_hash:
             skipped += 1
-            # Retrieve existing file reference if needed, 
-            # but for Gemini we might need to fetch the list of uploaded files from API.
             continue
             
-        print(f"Uploading {filename}...")
+        # If hash is different and file exists in state -> Update (Delete old file first)
+        if filename in state:
+            old_gemini_name = state[filename].get("gemini_name")
+            if old_gemini_name:
+                logging.info(f"Deleting old version of {filename} ({old_gemini_name})")
+                try:
+                    genai.delete_file(old_gemini_name)
+                except Exception as e:
+                    logging.warning(f"Could not delete old file {old_gemini_name}: {e}")
+            updated += 1
+        else:
+            added += 1
+            
+        logging.info(f"Uploading {filename}...")
         try:
             # Upload file to Gemini
             uploaded_file = genai.upload_file(path=filepath, display_name=filename)
             
             # Save to state
             state[filename] = {
-                "mtime": mod_time,
+                "hash": file_hash,
                 "gemini_uri": uploaded_file.uri,
                 "gemini_name": uploaded_file.name
             }
-            
-            if filename in state:
-                updated += 1
-            else:
-                added += 1
-                
-            time.sleep(1) # Prevent rate limiting
         except Exception as e:
-            print(f"Error uploading {filename}: {e}")
+            logging.error(f"Error uploading {filename}: {e}")
+            if filename in state:
+                updated -= 1
+            else:
+                added -= 1
             
-    save_sync_state(state)
-    print(f"Sync complete. Added: {added}, Updated: {updated}, Skipped: {skipped}")
-    
-def get_all_remote_files():
-    """Retrieve all files uploaded to Gemini API."""
-    files = []
-    for f in genai.list_files():
-        files.append(f)
-    return files
+    # Save state
+    with open(STATE_FILE, "w") as f:
+        json.dump(state, f, indent=2)
+        
+    logging.info(f"Sync complete. Added: {added}, Updated: {updated}, Skipped: {skipped}")
 
 def ask_assistant(question):
-    """Sanity check: ask the assistant a question."""
-    print("Setting up model...")
-    # Fetch all files to provide as context
-    files = get_all_remote_files()
-    if not files:
-        print("No files found on Gemini. Please upload first.")
+    if not API_KEY:
+        logging.error("No API key.")
         return
-        
-    print(f"Using {len(files)} files as context.")
     
-    # We use gemini-1.5-flash as it supports large context windows (up to 1M tokens)
+    logging.info("Setting up model...")
+    files = get_all_remote_files()
+    
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name="gemini-2.5-flash",
         system_instruction=SYSTEM_PROMPT
     )
     
-    # Pass the question and the uploaded files as history/context
-    print(f"Asking: {question}")
+    logging.info(f"Asking: {question}")
     contents = files + [question]
-    
     response = model.generate_content(contents)
-    print("\n--- RESPONSE ---\n")
+    
+    print("\n--- OPTIBOT ---")
     print(response.text)
-    print("\n----------------\n")
+    print("---------------\n")
 
 if __name__ == "__main__":
-    import sys
-    if len(sys.argv) > 1 and sys.argv[1] == "--ask":
-        question = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else "How do I add a YouTube video?"
-        ask_assistant(question)
-    else:
-        upload_files_to_gemini()
+    logging.basicConfig(level=logging.INFO)
+    upload_files_to_gemini()

@@ -1,21 +1,37 @@
 import os
 import sys
 import datetime
+import logging
 from scraper import scrape_articles
 from vector_store import upload_files_to_gemini, ask_assistant
 
+# Configure Logging to output to both Console and sync.log file
+log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.INFO)
+
+# Console handler
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setFormatter(log_formatter)
+root_logger.addHandler(console_handler)
+
+# File handler
+file_handler = logging.FileHandler("sync.log", mode='a', encoding='utf-8')
+file_handler.setFormatter(log_formatter)
+root_logger.addHandler(file_handler)
+
 def run_daily_job():
-    print(f"[{datetime.datetime.now()}] Starting Daily Job...")
+    logging.info("Starting Daily Job...")
     
-    # Bước 1: Re-scrape
-    print("\n--- STEP 1: FETCH DATA FROM ZENDESK ---")
-    scrape_articles(limit=50)
+    # Step 1: Re-scrape
+    logging.info("--- STEP 1: FETCH DATA FROM ZENDESK ---")
+    scrape_articles()
     
-    # Bước 2: Upload delta
-    print("\n--- STEP 2: SYNC DATA TO GEMINI ---")
+    # Step 2: Upload delta
+    logging.info("--- STEP 2: SYNC DATA TO GEMINI ---")
     upload_files_to_gemini()
     
-    print(f"\n[{datetime.datetime.now()}] Daily Job Finished!")
+    logging.info("Daily Job Finished!")
 
 if __name__ == "__main__":
     # Handle command line arguments
