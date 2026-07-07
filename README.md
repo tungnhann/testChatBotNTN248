@@ -21,16 +21,26 @@ This repository contains the implementation of the OptiBot Mini-Clone, integrati
    ```
 
 3. **Configure Environment:**
-   Rename `.env.sample` to `.env` and add your Google Gemini API Key:
+   Rename `.env.sample` to `.env` and add your OpenAI API Key:
    ```env
-   GEMINI_API_KEY=your_actual_key_here
+   OPENAI_API_KEY=your_actual_key_here
    ```
 
 4. **Run the Daily Job (Scrape & Sync):**
    ```bash
    python main.py
    ```
-   *This will scrape data to `data/` and upload it to Gemini.*
+   *This will scrape data to `data/` and upload it to OpenAI.*
+
+## Deployment & Daily Scheduling
+This project includes an automated GitHub Actions workflow (`.github/workflows/daily_sync.yml`) that automatically runs the scraper and syncs to OpenAI once per day at 00:00 UTC. To enable it:
+1. Push this repository to GitHub.
+2. Go to **Settings > Secrets and variables > Actions** in your GitHub repository.
+3. Add a new repository secret named `OPENAI_API_KEY` with your OpenAI API key.
+
+Alternatively, to deploy and schedule this on a cloud provider like **DigitalOcean, Render, or Railway**:
+1. Deploy the background worker using the provided `Dockerfile`.
+2. Configure a native **Cron Job** on the platform (e.g., Render Cron Job, DigitalOcean App Platform Worker) with the schedule `0 0 * * *` and the command `python main.py`.
 
 5. **Test the Assistant:**
    ```bash
