@@ -39,8 +39,24 @@ def save_state(state):
 
 def get_assistant_id():
     state = load_state()
-    return state.get("metadata", {}).get("assistant_id")
-
+    ast_id = state.get("metadata", {}).get("assistant_id")
+    if ast_id:
+        return ast_id
+        
+    # If not in local state, try to find it dynamically from OpenAI (for decoupled web deployments)
+    client = get_client()
+    if client:
+        try:
+            for asst in client.beta.assistants.list(limit=50):
+                if asst.name == "OptiBot":
+                    # Save it to state to avoid redundant API calls next time
+                    state.setdefault("metadata", {})["assistant_id"] = asst.id
+                    save_state(state)
+                    return asst.id
+        except Exception as e:
+            logging.error(f"Error fetching assistant from OpenAI: {e}")
+            
+    return None
 def upload_files_to_openai():
     client = get_client()
     if not client:
