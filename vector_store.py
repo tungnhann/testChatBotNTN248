@@ -95,7 +95,11 @@ def upload_files_to_openai():
         for asst in client.beta.assistants.list(limit=50):
             if asst.name == "OptiBot":
                 assistant_id = asst.id
-                logging.info(f"Found existing Assistant: {assistant_id}")
+                logging.info(f"Found existing Assistant: {assistant_id}. Re-attaching Vector Store...")
+                client.beta.assistants.update(
+                    assistant_id=assistant_id,
+                    tool_resources={"file_search": {"vector_store_ids": [vector_store_id]}}
+                )
                 break
                 
         if not assistant_id:
