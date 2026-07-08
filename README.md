@@ -20,8 +20,8 @@ Here is a screenshot of the assistant successfully answering a sample question b
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
-   cd <repo-name>
+   git clone https://github.com/tungnhann/testChatBotNTN248.git
+   cd testChatBotNTN248
    ```
 
 2. **Install dependencies:**
@@ -30,7 +30,7 @@ Here is a screenshot of the assistant successfully answering a sample question b
    ```
 
 3. **Configure Environment:**
-   Rename `.env.sample` to `.env` and add your OpenAI API Key:
+   Create `.env` and add your OpenAI API Key:
    ```env
    OPENAI_API_KEY=sk-your_actual_key_here
    ```
@@ -61,9 +61,8 @@ This handles running the background job at 00:00 UTC every day to keep the bot's
 4. Go to the **Actions** tab in your repository. The `Daily Sync Job` workflow is pre-configured and will automatically run every midnight. You can also trigger it manually by clicking `Run workflow`.
 
 ### 2. Deploy the Chat UI (Streamlit Web App)
-*(Important Note: Streamlit relies on WebSockets for persistent connections, meaning it cannot be deployed on serverless platforms like **Vercel**. Please use Render or Streamlit Cloud instead).*
 
-**Option A: Using Render.com (Recommended for Docker)**
+**Using Render.com**
 1. Log in to [Render.com](https://render.com/) and create a **New > Web Service**.
 2. Connect it to your GitHub repository.
 3. Configure the service:
@@ -74,15 +73,6 @@ This handles running the background job at 00:00 UTC every day to keep the bot's
    - Value: Your OpenAI API key.
 5. Click **Create Web Service**. Render will automatically read the `Dockerfile` and serve your Chat UI.
 
-**Option B: Using Streamlit Community Cloud (100% Free)**
-1. Log in to [share.streamlit.io](https://share.streamlit.io/) with your GitHub account.
-2. Click **Create app** and select your GitHub repository.
-3. Set the **Main file path** to `app.py`.
-4. Click **Advanced settings** and paste `OPENAI_API_KEY=sk-your_key_here` into the Secrets box.
-5. Click **Deploy**.
-
----
-*Note: Cloud storage is typically ephemeral (wiped on restarts). The code handles this gracefully by dynamically looking up your existing Assistant and Vector Store on OpenAI by name, ensuring your account is not spammed with duplicate assistants.*
 
 ## Docker Deployment (Manual)
 If you wish to test the Dockerized UI locally before deploying to production:
