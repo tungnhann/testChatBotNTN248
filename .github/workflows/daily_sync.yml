@@ -24,4 +24,4 @@ jobs:
       - name: Run Scraper and OpenAI Sync
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python main.py
+        run: docker run -e OPENAI_API_KEY="$OPENAI_SECRET" daily-sync-app
