@@ -8,7 +8,15 @@ This repository contains the implementation of the OptiBot Mini-Clone, integrati
 - **Task 3:** Implements a delta-sync strategy to only upload new or updated articles to minimize API costs.
 - **Task 4:** Provides a clean web-based Chat UI using Streamlit for end-users to interact with the assistant.
 
-## Setup & Run Locally
+## 📊 Daily Job Logs
+You can view the execution logs of the daily data scraping and syncing job on GitHub Actions here:
+👉 **[View Daily Sync Job Logs](https://github.com/tungnhann/testChatBotNTN248/actions)**
+
+## 📸 Demo
+Here is a screenshot of the assistant successfully answering a sample question based on the scraped knowledge base:
+![Assistant Answering](screenshot.png)
+
+## 🛠️ Setup & Run Locally
 
 1. **Clone the repository:**
    ```bash
