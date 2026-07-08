@@ -21,4 +21,4 @@ jobs:
       - name: Run Main Script via Docker
         env:
           OPENAI_SECRET: ${{ secrets.OPENAI_API_KEY }}
-        run: docker run -e OPENAI_API_KEY="$OPENAI_SECRET" daily-sync-app
+        run: docker run -e OPENAI_API_KEY="$OPENAI_SECRET" daily-sync-app python main.py
