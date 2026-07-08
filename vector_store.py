@@ -43,7 +43,7 @@ def get_assistant_id():
     if ast_id:
         return ast_id
         
-    # If not in local state, try to find it dynamically from OpenAI (for decoupled web deployments)
+
     client = get_client()
     if client:
         try:
