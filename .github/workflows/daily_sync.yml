@@ -39,7 +39,12 @@ jobs:
           
           # Lấy dòng kết quả cuối cùng từ file sync.log
           MSG=$(grep "Sync complete" sync.log | tail -n 1 | sed 's/.*INFO - //')
-          if [ -z "$MSG" ]; then MSG="chore: auto-save sync state"; fi
+          if [ -n "$MSG" ]; then
+            echo "$(date +'%Y-%m-%d %H:%M:%S') - $MSG" >> history.log
+            git add history.log
+          else
+            MSG="chore: auto-save sync state"
+          fi
           
           # Bắt buộc tạo commit mỗi ngày để ghi nhận lịch sử (kể cả khi không có bài nào mới)
           git commit --allow-empty -m "$MSG"
