@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "vector_store_id": "vs_6a4db3fec79c8191a4647004b1464c07",
+    "assistant_id": "asst_0pfxZHcD1u81nD0liB1dvrzH"
+  },
+  "files": {
+    "17639078588691-how-to-cancel-subscription-or-pause-subscription-for-seasonal-use-case.md": {
+      "hash": "7b069badfcbc29af753f58b4ed975595",
+      "file_id": "file-XNK1vEVQ6PjuURCsp4AzmP"
+    },
+    "4404608957075-how-to-delete-your-account-from-optisigns.md": {
+      "hash": "ba4e58cb0e0b4293e2e9105836959328",
+      "file_id": "file-7nSqHTBTshG26muS7DTSZ6"
+    },
+    "4410655948563-how-to-use-livestream-com-app.md": {
+      "hash": "f7308b42df68d104a35e5763cdc705b6",
+      "file_id": "file-2v2V4V2qSMT6cZJhxGqFsq"
+    },
+    "360016375793-can-i-have-my-invoices-receipts-sent-to-a-different-email-address.md": {
+      "hash": "faafee66107d2d106f4289ff7e21bfcb",
+      "file_id": "file-Pefph8mKK19jbX4rAgJjLB"
+    },
+    "360060202914-how-to-use-youtube-channel-with-optisigns.md": {
+      "hash": "a332847e843d7445cd505610fd9e3eaa",
+      "file_id": "file-1bWmMVWKMrQAD6yu6ioTYG"
+    },
+    "25607930101907-how-to-get-the-most-out-of-your-digital-signs.md": {
+      "hash": "5568e199b88d4f8ea4067ea6430b9dfd",
+      "file_id": "file-1qcNyHb3eNTbNXt5zp7Kbe"
+    },
+    "18823504383891-optisigns-getting-started-guide.md": {
+      "hash": "77513384a64630043b36358137d0b5fe",
+      "file_id": "file-EMBVorceTvbxwjdkN1ZMYg"
+    },
+    "360060284174-how-to-use-youtube-live-schedule-with-optisigns.md": {
+      "hash": "1ad2dd38f55f5fd8bdd72ffae253f7cc",
+      "file_id": "file-NQZWGAfXrpcCS2nCTvK81T"
+    },
+    "1500000493782-billing-how-do-i-change-my-subscription-plan.md": {
+      "hash": "e715bc2fc937b74e538125e9e06940ae",
+      "file_id": "file-PcbN15pVZS1SH6mVrHdUNw"
+    },
+    "1500003244381-about-the-onhold-devices-folder.md": {
+      "hash": "a3dc0737f990fe9bea4b66af64e7a683",
+      "file_id": "file-8zS1CbEse1itzvbDHsuJZG"
+    },
+    "1500002131621-how-to-use-youtube-live-with-optisigns.md": {
+      "hash": "05ec7c8635cedcb974d6b79076766c7c",
+      "file_id": "file-5BCSQtxWQ2E3vRpDBDFWyH"
+    },
+    "360046859534-how-to-use-twitch-app.md": {
+      "hash": "8e9855cece8b63d21fefdb345f440371",
+      "file_id": "file-LrzgYMNAcPSebnmvU46xCL"
+    },
+    "360041587014-how-to-change-billing-information.md": {
+      "hash": "dc2e6ed94693b3ab1bf48d8a24b3f79d",
+      "file_id": "file-Q1B8KxU8wJ5ZYZeT7qYzKL"
+    },
+    "31695220475283-configuring-mass-deployment-with-jamf-pro-mdm-on-apple-devices.md": {
+      "hash": "89b20e288925c8b4dd3b2073a134b0f1",
+      "file_id": "file-AnaHEvuXnBHpvcs2wTBXeV"
+    },
+    "29792081890323-guide-for-creating-content-with-optisigns.md": {
+      "hash": "ec12abc201bf0185788a19a39086d3d4",
+      "file_id": "file-Gf94QnpdUc2FUPf5FCuQcc"
+    },
+    "360016254994-how-to-add-use-vimeo-video-with-optisigns.md": {
+      "hash": "9aef99021f436a78dc7c832873583500",
+      "file_id": "file-HiatMFDBnbMxAFkDvpJjgx"
+    },
+    "35749502945555-how-to-using-sepa-and-ideal-for-eur-currency-subscription-payments.md": {
+      "hash": "2cd37b1752378668d47f4d9ef57ce075",
+      "file_id": "file-ESwDTnQi7h2fgx9gCwpwgX"
+    },
+    "360051014713-how-to-use-youtube-with-optisigns.md": {
+      "hash": "593bbbb4b99e9da23282050ea04b4c02",
+      "file_id": "file-CjYsayrqPpioNcsc8CZoJF"
+    },
+    "360035739414-how-to-preview-a-screen.md": {
+      "hash": "23c327644ea0fee59311878ca80bb257",
+      "file_id": "file-5bg1JJHenefgYPMHErVkUU"
+    },
+    "28115946505107-how-to-change-close-nav-bar-styler-preferences.md": {
+      "hash": "3bc023b728670873adf5fe06057d7f2e",
+      "file_id": "file-YLsLQb1voDaxucvKmcJSGF"
+    },
+    "4404616314515-how-to-change-account-owners.md": {
+      "hash": "cdb88f58387a09af628ea8976c23d119",
+      "file_id": "file-7iZ1jYmQGkrAkE8bEnv68V"
+    },
+    "16364134190355-how-to-use-streaming-app-with-optisigns.md": {
+      "hash": "f50fca9573e047e08d81e14677eea300",
+      "file_id": "file-5u781eZeYKDviWgFDZtm1x"
+    },
+    "12947300131731-show-hide-downloading-status-on-your-player.md": {
+      "hash": "f8a195bac2785984f4a2c69819211938",
+      "file_id": "file-C8T6vvVYzKUN3x2mwhguLn"
+    },
+    "360016219114-what-if-i-want-to-increase-decrease-number-of-screens-during-the-month.md": {
+      "hash": "fa8c92c61ef552dca8743655ded4e300",
+      "file_id": "file-P2uDe9iQbJB5LNNP7xH7zi"
+    },
+    "1500002042241-how-to-use-hdmi-other-video-input-sources-in-with-optisigns.md": {
+      "hash": "7081636dd4d28984d640a204d14c365b",
+      "file_id": "file-2Pg4cZvdbrDte8FfCpP4n3"
+    },
+    "4411762539027-multilingual-and-multi-currency.md": {
+      "hash": "66beac380e66701cc4297be36e1e53dd",
+      "file_id": "file-QmURz2aBFFk9hduFBcvwLo"
+    },
+    "8369526604435-how-to-use-the-video-stream-app.md": {
+      "hash": "1151c5a699414f0b521307a6d7835f6b",
+      "file_id": "file-U6TyjF5h3XaYAFyr3xsqrX"
+    },
+    "360054557434-view-billing-history-and-download-receipts.md": {
+      "hash": "56fe4a259ab52dc6915d34e1b978ce8c",
+      "file_id": "file-7z3kAkuQVfnPoMdheWGRTz"
+    },
+    "35626165056787-how-to-contact-optisigns-support.md": {
+      "hash": "592ee5eeff309275b92d46d5225eea28",
+      "file_id": "file-9cDLJEi8mtp9N8x8kkgogu"
+    },
+    "31960461758611-how-to-order-a-preconfigured-optisigns-android-player-device.md": {
+      "hash": "2582b4bf34a99ad1a3d95bb2db154f67",
+      "file_id": "file-U4zQnj7ff8e8FZBmHUrdfk"
+    },
+    "360016247974-how-to-upload-manage-your-files-assets.md": {
+      "hash": "95ec0bc630f93ab6e2fb50502ce86d57",
+      "file_id": "file-SMJRWnfyUZ7eezMjGucaLg"
+    },
+    "17129313173395-how-to-manage-sub-account-billing-with-optisigns.md": {
+      "hash": "6650240647b5a79363ce50f2a045a3d5",
+      "file_id": "file-Rm7GLMwW7CygkMRJupgBAw"
+    }
+  }
+}
