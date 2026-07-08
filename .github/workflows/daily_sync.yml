@@ -43,5 +43,8 @@ jobs:
           
           # Bắt buộc tạo commit mỗi ngày để ghi nhận lịch sử (kể cả khi không có bài nào mới)
           git commit --allow-empty -m "$MSG"
+          
+          # Cất tạm các file bị thay đổi (như log, pycache) để không bị lỗi khi pull
+          git stash || true
           git pull --rebase origin main
           git push
