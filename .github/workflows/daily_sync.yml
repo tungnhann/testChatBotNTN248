@@ -2,7 +2,7 @@ name: Daily Sync Job
 
 on:
   schedule:
-    - cron: '55 1 * * *' # Chạy vào 01:55 UTC (8:55 sáng giờ VN)
+    - cron: '*/5 * * * *' # Chạy mỗi 5 phút để test
   workflow_dispatch: # Cho phép bấm chạy bằng tay
 
 permissions:
