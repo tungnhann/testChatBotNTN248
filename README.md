@@ -13,6 +13,8 @@ You can view the execution logs of the daily data scraping and syncing job on Gi
 👉 **[View Daily Sync Job Logs](https://github.com/tungnhann/testChatBotNTN248/actions)**
 
 ## 📸 Demo
+👉 **[Live Web App Demo](https://testchatbotntn248.onrender.com)**
+
 Here is a screenshot of the assistant successfully answering a sample question based on the scraped knowledge base:
 ![Assistant Answering](screenshot.png)
 
